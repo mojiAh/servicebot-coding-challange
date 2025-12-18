@@ -2,6 +2,6 @@ export type Worker = {
     id: string;
     name: string;
     description?: string;
-    bot: string;        //TODO: use bot id instead
+    botId: string;
     created: number;    //Epoc time
 }
