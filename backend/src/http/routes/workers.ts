@@ -7,11 +7,12 @@ type WorkersParams = {
 };
 
 export function createWorkersRouter(workerRepository: WorkerRepository) {
-  const router = Router();
+  const router = Router({ mergeParams: true });
 
   router.get("/", async (req: Request<WorkersParams>, res, next) => {
     try {
       const { botId } = req.params;
+      console.log(req);
       const list = await listWorkersForBot(workerRepository, botId);
       res.status(200).json(list);
     } catch (err) {

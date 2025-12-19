@@ -7,7 +7,7 @@ type BotLogsParams = {
   botId: string;
 };
 export function createBotLogsRouter(logRepository: LogRepository) {
-  const router = Router();
+  const router = Router({ mergeParams: true });
 
   router.get("/", async (req: Request<BotLogsParams>, res, next) => {
     try {
@@ -26,7 +26,7 @@ type WorkerLogsParams = {
   workerId: string;
 };
 export function createWorkerLogsRouter(logRepository: LogRepository) {
-  const router = Router();
+  const router = Router({ mergeParams: true });
 
   router.get("/", async (req: Request<WorkerLogsParams>, res, next) => {
     try {
