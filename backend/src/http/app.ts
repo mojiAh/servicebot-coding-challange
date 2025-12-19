@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { JsonBotRepository } from "../repositories/JsonBotRepository";
 import { JsonWorkerRepository } from "../repositories/JsonWorkerRepository";
 import { JsonLogRepository } from "../repositories/JsonLogRepository";
@@ -8,6 +9,7 @@ import { createBotLogsRouter, createWorkerLogsRouter } from "./routes/logs";
 
 export const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 const jsonBotRepository = new JsonBotRepository();
