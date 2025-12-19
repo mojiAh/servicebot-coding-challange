@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
-export type BotStatus = "DISABLED" | "ENABLED" | "PAUSED";
+import type { Bot } from "../types";
 
-export type Bot = {
-  id: string;
-  name: string;
-  description?: string;
-  status: BotStatus;
-  created: number; //Epoc timestamp
-};
 export default function BotsList() {
   const [bots, setBots] = useState<Bot[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
