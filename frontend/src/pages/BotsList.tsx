@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import type { Bot } from "../types";
 
-export default function BotsList() {
+interface BotsListProps {
+  selectedBotId?: string;
+  onSelectBotId: (botId: string) => void;
+}
+
+export default function BotsList({
+  selectedBotId,
+  onSelectBotId,
+}: BotsListProps) {
   const [bots, setBots] = useState<Bot[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
@@ -27,15 +35,23 @@ export default function BotsList() {
     <table>
       <thead>
         <tr>
-          <th>Bot list</th>
+          <th>Name</th>
           <th>Description</th>
+          <th>Status</th>
+          <th>Created at</th>
         </tr>
       </thead>
       <tbody>
         {bots.map((bot) => (
-          <tr key={bot.id}>
+          <tr
+            key={bot.id}
+            onClick={() => onSelectBotId(bot.id)}
+            className={bot.id === selectedBotId ? "selected" : ""}
+          >
             <td>{bot.name}</td>
             <td>{bot.description}</td>
+            <td>{bot.status}</td>
+            <td>{new Date(bot.created).toLocaleString()}</td>
           </tr>
         ))}
       </tbody>
