@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import type { Worker } from "../types";
 
 interface WorkersListProps {
-  selectedBotId?: string;
-  selectedWorkerId?: string;
+  selectedBotId: string | null;
+  selectedWorkerId?: string | null;
   onSelectWorkerId: (workerId: string) => void;
 }
 
@@ -41,7 +41,7 @@ export default function WorkersList({
   }, [selectedBotId]);
 
   if (loading) return <div>Loading...</div>;
-  if (workers.length === 0) return <div>No Workers for found</div>;
+  if (workers.length === 0) return <div>Select a bot to view workers</div>;
   return (
     <table>
       <thead>

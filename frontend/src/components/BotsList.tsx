@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import type { Bot } from "../types";
 
 interface BotsListProps {
-  selectedBotId?: string;
+  selectedBotId: string | null;
   onSelectBotId: (botId: string) => void;
 }
 

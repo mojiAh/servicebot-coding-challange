@@ -5,12 +5,12 @@ import WorkersList from "./components/WorkersList";
 import LogsList from "./components/LogsList";
 
 function App() {
-  const [selectedBotId, setSelectedBotId] = useState<string>();
-  const [selectedWorkerId, setSelectedWorkerId] = useState<string>();
+  const [selectedBotId, setSelectedBotId] = useState<string | null>(null);
+  const [selectedWorkerId, setSelectedWorkerId] = useState<string | null>(null);
 
   const handleSelectedBotId = (botId: string) => {
     setSelectedBotId(botId);
-    setSelectedWorkerId(undefined);
+    setSelectedWorkerId(null);
   };
 
   return (

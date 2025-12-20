@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import type { Log } from "../types";
 
 interface LogsListProps {
-  selectedBotId?: string;
-  selectedWorkerId?: string;
+  selectedBotId?: string | null;
+  selectedWorkerId?: string | null;
 }
 
 export default function LogsList({
@@ -43,7 +43,7 @@ export default function LogsList({
   }, [selectedBotId, selectedWorkerId]);
 
   if (loading) return <div>Loading...</div>;
-  if (logs.length === 0) return <div>No Logs for found</div>;
+  if (logs.length === 0) return <div>Select a bot to view logs</div>;
   return (
     <table>
       <thead>
@@ -56,7 +56,7 @@ export default function LogsList({
         {logs.map((log) => (
           <tr key={log.id}>
             <td>{log.message}</td>
-            <td>{log.created}</td>
+            <td>{new Date(log.created).toLocaleString()}</td>
           </tr>
         ))}
       </tbody>
