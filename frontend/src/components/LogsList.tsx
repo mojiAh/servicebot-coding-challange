@@ -9,9 +9,14 @@ export default function LogsList({
   selectedBotId,
   selectedWorkerId,
 }: LogsListProps) {
-  const { data: logs, loading } = useLogs({ selectedBotId, selectedWorkerId });
+  const {
+    data: logs,
+    loading,
+    error,
+  } = useLogs({ selectedBotId, selectedWorkerId });
 
   if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading: {error.message}</div>;
   if (logs.length === 0) return <div>Select a bot to view logs</div>;
   return (
     <table>

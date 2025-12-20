@@ -10,6 +10,8 @@ export default function useLogs({
 }) {
   const [data, setData] = useState<Log[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
   useEffect(() => {
     if (!selectedBotId) {
       setData([]);
@@ -30,8 +32,8 @@ export default function useLogs({
           throw new Error(`Response status: ${result.status}`);
         }
         setData(await result.json());
-      } catch (error) {
-        console.error(error);
+      } catch (e) {
+        setError(e as Error);
       } finally {
         setLoading(false);
       }
@@ -39,5 +41,5 @@ export default function useLogs({
 
     fetchLogs();
   }, [selectedBotId, selectedWorkerId]);
-  return { data, loading };
+  return { data, loading, error };
 }

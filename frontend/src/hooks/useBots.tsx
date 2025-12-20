@@ -4,6 +4,7 @@ import type { Bot } from "../types";
 export default function useBots() {
   const [data, setData] = useState<Bot[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchBots = async () => {
@@ -14,12 +15,12 @@ export default function useBots() {
         }
         setData(await result.json());
         setLoading(false);
-      } catch (error) {
-        console.error(error);
+      } catch (e) {
+        setError(e as Error);
       }
     };
 
     fetchBots();
   }, []);
-  return { data, loading };
+  return { data, loading, error };
 }

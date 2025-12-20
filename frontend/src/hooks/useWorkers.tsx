@@ -4,6 +4,8 @@ import type { Worker } from "../types";
 export default function useWorkers(selectedBotId: string | null) {
   const [data, setData] = useState<Worker[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
   useEffect(() => {
     const fetchWorkers = async () => {
       if (!selectedBotId) {
@@ -20,8 +22,8 @@ export default function useWorkers(selectedBotId: string | null) {
           throw new Error(`Response status: ${result.status}`);
         }
         setData(await result.json());
-      } catch (error) {
-        console.error(error);
+      } catch (e) {
+        setError(e as Error);
       } finally {
         setLoading(false);
       }
@@ -29,5 +31,5 @@ export default function useWorkers(selectedBotId: string | null) {
 
     fetchWorkers();
   }, [selectedBotId]);
-  return { data, loading };
+  return { data, loading, error };
 }

@@ -9,9 +9,10 @@ export default function BotsList({
   selectedBotId,
   onSelectBotId,
 }: BotsListProps) {
-  const { data: bots, loading } = useBots();
+  const { data: bots, loading, error } = useBots();
 
   if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading: {error.message}</div>;
   if (bots.length === 0) return <div>No Bots found</div>;
   return (
     <table>
