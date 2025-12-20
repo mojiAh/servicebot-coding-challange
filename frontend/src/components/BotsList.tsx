@@ -16,6 +16,13 @@ export default function BotsList({
   if (bots.length === 0) return <div>No Bots found</div>;
   return (
     <table>
+      <caption className="table-caption">Bots ({`${bots.length}`})</caption>
+      <colgroup>
+        <col className="col-name" />
+        <col className="col-description" />
+        <col className="col-status" />
+        <col className="col-date" />
+      </colgroup>
       <thead>
         <tr>
           <th>Name</th>
@@ -34,7 +41,9 @@ export default function BotsList({
             <td>{bot.name}</td>
             <td>{bot.description}</td>
             <td>{bot.status}</td>
-            <td>{new Date(bot.created).toLocaleString()}</td>
+            <td className="col-date">
+              {new Date(bot.created).toLocaleString()}
+            </td>
           </tr>
         ))}
       </tbody>

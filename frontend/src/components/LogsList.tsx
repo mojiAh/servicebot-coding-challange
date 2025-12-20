@@ -20,6 +20,11 @@ export default function LogsList({
   if (logs.length === 0) return <div>Select a bot to view logs</div>;
   return (
     <table>
+      <caption className="table-caption">Logs ({`${logs.length}`})</caption>
+      <colgroup>
+        <col className="col-message" />
+        <col className="col-date" />
+      </colgroup>
       <thead>
         <tr>
           <th>Message</th>
@@ -30,7 +35,9 @@ export default function LogsList({
         {logs.map((log) => (
           <tr key={log.id}>
             <td>{log.message}</td>
-            <td>{new Date(log.created).toLocaleString()}</td>
+            <td className="col-date">
+              {new Date(log.created).toLocaleString()}
+            </td>
           </tr>
         ))}
       </tbody>

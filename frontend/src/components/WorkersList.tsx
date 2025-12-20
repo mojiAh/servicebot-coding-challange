@@ -18,6 +18,14 @@ export default function WorkersList({
   if (workers.length === 0) return <div>Select a bot to view workers</div>;
   return (
     <table>
+      <caption className="table-caption">
+        Workers ({`${workers.length}`})
+      </caption>
+      <colgroup>
+        <col className="col-name" />
+        <col className="col-description" />
+        <col className="col-date" />
+      </colgroup>
       <thead>
         <tr>
           <th>Name</th>
@@ -34,7 +42,9 @@ export default function WorkersList({
           >
             <td>{worker.name}</td>
             <td>{worker.description}</td>
-            <td>{new Date(worker.created).toLocaleString()}</td>
+            <td className="col-date">
+              {new Date(worker.created).toLocaleString()}
+            </td>
           </tr>
         ))}
       </tbody>

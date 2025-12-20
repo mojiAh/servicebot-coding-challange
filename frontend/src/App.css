@@ -1,13 +1,32 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.layout {
+  display: flex;
+  gap: 16px;
+  height: 100vh;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.column {
+  flex: 1;
+  overflow: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .column {
+    height: 33vh;
+  }
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   font-size: 14px;
 }
 
@@ -20,6 +39,19 @@ td {
   padding: 8px 12px;
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
+}
+
+th {
+  font-weight: 600;
+  background-color: #f9fafb;
+}
+
+td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
 }
 
 tbody tr {
@@ -35,14 +67,38 @@ tbody tr.selected {
   font-weight: 500;
 }
 
-.layout {
-  display: flex;
-  gap: 16px;
+.col-status {
+  width: 90px;
 }
 
-.column {
-  flex: 1;
-  overflow: auto;
+.col-name {
+  min-width: 100px;
+  max-width: 110px;
 }
+
+.col-date {
+  width: 150px;
+}
+.col-description {
+  min-width: 140px;
+  max-width: 360px;
+}
+
+td.col-date {
+  color: #666;
+  font-size: 12px;
+}
+
+.table-caption {
+  caption-side: top;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+
 
 
