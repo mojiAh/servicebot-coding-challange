@@ -35,3 +35,14 @@ tbody tr.selected {
   font-weight: 500;
 }
 
+.layout {
+  display: flex;
+  gap: 16px;
+}
+
+.column {
+  flex: 1;
+  overflow: auto;
+}
+
+

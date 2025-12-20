@@ -14,21 +14,27 @@ function App() {
   };
 
   return (
-    <>
-      <BotsList
-        selectedBotId={selectedBotId}
-        onSelectBotId={handleSelectedBotId}
-      />
-      <WorkersList
-        selectedBotId={selectedBotId}
-        selectedWorkerId={selectedWorkerId}
-        onSelectWorkerId={setSelectedWorkerId}
-      />
-      <LogsList
-        selectedBotId={selectedBotId}
-        selectedWorkerId={selectedWorkerId}
-      />
-    </>
+    <div className="layout">
+      <div className="column">
+        <BotsList
+          selectedBotId={selectedBotId}
+          onSelectBotId={handleSelectedBotId}
+        />
+      </div>
+      <div className="column">
+        <WorkersList
+          selectedBotId={selectedBotId}
+          selectedWorkerId={selectedWorkerId}
+          onSelectWorkerId={setSelectedWorkerId}
+        />
+      </div>
+      <div className="column">
+        <LogsList
+          selectedBotId={selectedBotId}
+          selectedWorkerId={selectedWorkerId}
+        />
+      </div>
+    </div>
   );
 }
 
