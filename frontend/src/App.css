@@ -1,9 +1,24 @@
 .layout {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
   height: 100vh;
+}
+.layout-header {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #fafafa;
+  height: 40px;
+  box-sizing: border-box;
+}
+.layout-body {
+  display: flex;
+  gap: 16px;
   padding: 16px;
   box-sizing: border-box;
+  height: 90%;
+
 }
 
 .column {
@@ -14,7 +29,7 @@
 }
 
 @media (max-width: 900px) {
-  .layout {
+  .layout-body {
     flex-direction: column;
   }
 
@@ -98,6 +113,14 @@ td.col-date {
   background-color: #f9fafb;
   border-bottom: 1px solid #e5e7eb;
 }
+
+.table-caption .sub-caption {
+  padding-left: 30px;
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
 
 
 

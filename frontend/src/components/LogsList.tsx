@@ -1,14 +1,17 @@
 import { useLogs } from "../hooks";
+import type { Worker } from "../types";
 
 interface LogsListProps {
   selectedBotId: string | null;
-  selectedWorkerId: string | null;
+  selectedWorker: Worker | null;
 }
 
 export default function LogsList({
   selectedBotId,
-  selectedWorkerId,
+  selectedWorker,
 }: LogsListProps) {
+  const selectedWorkerId = selectedWorker?.id ?? null;
+  const selectedWorkerName = selectedWorker?.name ?? null;
   const {
     data: logs,
     loading,
@@ -20,7 +23,12 @@ export default function LogsList({
   if (logs.length === 0) return <div>Select a bot to view logs</div>;
   return (
     <table>
-      <caption className="table-caption">Logs ({`${logs.length}`})</caption>
+      <caption className="table-caption">
+        <span>Logs ({`${logs.length}`})</span>
+        {selectedWorkerId && (
+          <span className="sub-caption">Worker: {selectedWorkerName}</span>
+        )}
+      </caption>
       <colgroup>
         <col className="col-message" />
         <col className="col-date" />

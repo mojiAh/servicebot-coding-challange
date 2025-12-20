@@ -1,14 +1,12 @@
 import { useBots } from "../hooks";
+import type { Bot } from "../types";
 
 interface BotsListProps {
-  selectedBotId: string | null;
-  onSelectBotId: (botId: string) => void;
+  selectedBot: Bot | null;
+  onSelectBot: (botId: Bot) => void;
 }
 
-export default function BotsList({
-  selectedBotId,
-  onSelectBotId,
-}: BotsListProps) {
+export default function BotsList({ selectedBot, onSelectBot }: BotsListProps) {
   const { data: bots, loading, error } = useBots();
 
   if (loading) return <div>Loading...</div>;
@@ -35,8 +33,8 @@ export default function BotsList({
         {bots.map((bot) => (
           <tr
             key={bot.id}
-            onClick={() => onSelectBotId(bot.id)}
-            className={bot.id === selectedBotId ? "selected" : ""}
+            onClick={() => onSelectBot(bot)}
+            className={bot.id === selectedBot?.id ? "selected" : ""}
           >
             <td>{bot.name}</td>
             <td>{bot.description}</td>

@@ -3,36 +3,46 @@ import "./App.css";
 import BotsList from "./components/BotsList";
 import WorkersList from "./components/WorkersList";
 import LogsList from "./components/LogsList";
+import type { Bot, Worker } from "./types";
 
 function App() {
-  const [selectedBotId, setSelectedBotId] = useState<string | null>(null);
-  const [selectedWorkerId, setSelectedWorkerId] = useState<string | null>(null);
+  const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
+  const [selectedWorker, setSelectedWorker] = useState<Worker | null>(null);
 
-  const handleSelectedBotId = (botId: string) => {
-    setSelectedBotId(botId);
-    setSelectedWorkerId(null);
+  const selectedBotId = selectedBot?.id ?? null;
+  const selectedBotName = selectedBot?.name ?? null;
+
+  const handleSelectedBot = (bot: Bot) => {
+    setSelectedBot(bot);
+    setSelectedWorker(null);
   };
 
   return (
     <div className="layout">
-      <div className="column">
-        <BotsList
-          selectedBotId={selectedBotId}
-          onSelectBotId={handleSelectedBotId}
-        />
+      <div className="layout-header">
+        {selectedBotId && (
+          <span>
+            Selected Bot: <strong>{selectedBotName}</strong>
+          </span>
+        )}
       </div>
-      <div className="column">
-        <WorkersList
-          selectedBotId={selectedBotId}
-          selectedWorkerId={selectedWorkerId}
-          onSelectWorkerId={setSelectedWorkerId}
-        />
-      </div>
-      <div className="column">
-        <LogsList
-          selectedBotId={selectedBotId}
-          selectedWorkerId={selectedWorkerId}
-        />
+      <div className="layout-body">
+        <div className="column">
+          <BotsList selectedBot={selectedBot} onSelectBot={handleSelectedBot} />
+        </div>
+        <div className="column">
+          <WorkersList
+            selectedBotId={selectedBotId}
+            selectedWorker={selectedWorker}
+            onSelectWorker={setSelectedWorker}
+          />
+        </div>
+        <div className="column">
+          <LogsList
+            selectedBotId={selectedBotId}
+            selectedWorker={selectedWorker}
+          />
+        </div>
       </div>
     </div>
   );

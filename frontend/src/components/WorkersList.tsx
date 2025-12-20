@@ -1,15 +1,16 @@
 import { useWorkers } from "../hooks";
+import type { Worker } from "../types";
 
 interface WorkersListProps {
   selectedBotId: string | null;
-  selectedWorkerId?: string | null;
-  onSelectWorkerId: (workerId: string) => void;
+  selectedWorker: Worker | null;
+  onSelectWorker: (worker: Worker) => void;
 }
 
 export default function WorkersList({
   selectedBotId,
-  selectedWorkerId,
-  onSelectWorkerId,
+  selectedWorker,
+  onSelectWorker,
 }: WorkersListProps) {
   const { data: workers, loading, error } = useWorkers(selectedBotId);
 
@@ -37,8 +38,8 @@ export default function WorkersList({
         {workers.map((worker) => (
           <tr
             key={worker.id}
-            onClick={() => onSelectWorkerId(worker.id)}
-            className={worker.id === selectedWorkerId ? "selected" : ""}
+            onClick={() => onSelectWorker(worker)}
+            className={worker.id === selectedWorker?.id ? "selected" : ""}
           >
             <td>{worker.name}</td>
             <td>{worker.description}</td>
