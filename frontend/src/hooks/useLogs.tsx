@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { fetchJson } from "../api";
 import type { Log } from "../types";
 
 export default function useLogs({
@@ -21,25 +22,20 @@ export default function useLogs({
 
     setLoading(true);
 
-    const fetchLogs = async () => {
-      try {
-        const result = await fetch(
-          !selectedWorkerId
-            ? `http://localhost:3000/bots/${selectedBotId}/logs`
-            : `http://localhost:3000/bots/${selectedBotId}/workers/${selectedWorkerId}/logs`
-        );
-        if (!result.ok) {
-          throw new Error(`Response status: ${result.status}`);
-        }
-        setData(await result.json());
-      } catch (e) {
+    fetchJson<Log[]>(
+      !selectedWorkerId
+        ? `/bots/${selectedBotId}/logs`
+        : `/bots/${selectedBotId}/workers/${selectedWorkerId}/logs`
+    )
+      .then((data) => {
+        setData(data);
+      })
+      .catch((e) => {
         setError(e as Error);
-      } finally {
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    };
-
-    fetchLogs();
+      });
   }, [selectedBotId, selectedWorkerId]);
   return { data, loading, error };
 }
