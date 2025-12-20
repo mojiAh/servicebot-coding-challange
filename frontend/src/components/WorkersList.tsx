@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import type { Worker } from "../types";
+import { useWorkers } from "../hooks";
 
 interface WorkersListProps {
   selectedBotId: string | null;
@@ -12,33 +11,7 @@ export default function WorkersList({
   selectedWorkerId,
   onSelectWorkerId,
 }: WorkersListProps) {
-  const [workers, setWorkers] = useState<Worker[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  useEffect(() => {
-    const fetchWorkers = async () => {
-      if (!selectedBotId) {
-        setWorkers([]);
-        setLoading(false);
-        return;
-      }
-      setLoading(true);
-      try {
-        const result = await fetch(
-          `http://localhost:3000/bots/${selectedBotId}/workers`
-        );
-        if (!result.ok) {
-          throw new Error(`Response status: ${result.status}`);
-        }
-        setWorkers(await result.json());
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWorkers();
-  }, [selectedBotId]);
+  const { data: workers, loading } = useWorkers(selectedBotId);
 
   if (loading) return <div>Loading...</div>;
   if (workers.length === 0) return <div>Select a bot to view workers</div>;
