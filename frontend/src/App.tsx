@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
-import BotsList from "./pages/BotsList";
+import BotsList from "./components/BotsList";
+import WorkersList from "./components/WorkersList";
+import LogsList from "./components/LogsList";
 
 function App() {
   const [selectedBotId, setSelectedBotId] = useState<string>();
@@ -11,6 +13,15 @@ function App() {
       <BotsList
         selectedBotId={selectedBotId}
         onSelectBotId={setSelectedBotId}
+      />
+      <WorkersList
+        selectedBotId={selectedBotId}
+        selectedWorkerId={selectedWorkerId}
+        onSelectWorkerId={setSelectedWorkerId}
+      />
+      <LogsList
+        selectedBotId={selectedBotId}
+        selectedWorkerId={selectedWorkerId}
       />
     </>
   );
