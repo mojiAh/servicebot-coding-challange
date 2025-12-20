@@ -8,11 +8,16 @@ function App() {
   const [selectedBotId, setSelectedBotId] = useState<string>();
   const [selectedWorkerId, setSelectedWorkerId] = useState<string>();
 
+  const handleSelectedBotId = (botId: string) => {
+    setSelectedBotId(botId);
+    setSelectedWorkerId(undefined);
+  };
+
   return (
     <>
       <BotsList
         selectedBotId={selectedBotId}
-        onSelectBotId={setSelectedBotId}
+        onSelectBotId={handleSelectedBotId}
       />
       <WorkersList
         selectedBotId={selectedBotId}
