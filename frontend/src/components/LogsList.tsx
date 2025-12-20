@@ -42,7 +42,7 @@ export default function LogsList({
       <tbody>
         {logs.map((log) => (
           <tr key={log.id}>
-            <td>{log.message}</td>
+            <td title={log.message}>{log.message}</td>
             <td className="col-date">
               {new Date(log.created).toLocaleString()}
             </td>
